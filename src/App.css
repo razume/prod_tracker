@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: rgba(37, 37, 37, 0.836);
+  text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+}
+
+.title {
+  margin-top: 1rem;
+  font-weight: lighter;
+  text-align: center;
+  font-size: 42pt;
+}
+
+.score-container {
+  display: flex;
+  justify-content: center;
+}
+
+.score {
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 75pt;
+  border: 8px solid rgba(37, 37, 37, 0.836);
+  border-radius: 2px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.activity-form {
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+}
+
+.activity-form > input {
+  height: 2rem;
+  margin-bottom: 0.5rem;
+  border: 2px solid rgba(37, 37, 37, 0.836);
+  padding: 3px;
+}
+
+.activity-form > span {
+  display: flex;
+  justify-content: space-between;
+
+  width: 25rem;
+}
+
+.activity-form > span > input {
+  font-size: 20pt;
+  width: 12rem;
+  color: white;
+  padding: 0.5rem;
+  background-color: rgba(37, 37, 37, 0.836);
+}
+
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 17pt;
+}
+
+li {
+  list-style-type: square;
+}

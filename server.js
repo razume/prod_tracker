@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const db = require('./db');
-
 const app = express();
+
+app.use(express.json());
 
 app.use('/dist', express.static(path.join(__dirname, 'dist')));
 
@@ -13,6 +14,18 @@ app.get('/', (req, res, next) =>
 app.get('/api/activities', (req, res, next) => {
   db.readActivities()
     .then(response => res.send(response))
+    .catch(next);
+});
+
+app.post('/api/activities', (req, res, next) => {
+  db.createActivity(req.body)
+    .then(activity => res.send(activity))
+    .catch(next);
+});
+
+app.delete('/api/activities/:id', (req, res, next) => {
+  db.deleteActivity(req.params.id)
+    .then(() => res.sendStatus(204))
     .catch(next);
 });
 

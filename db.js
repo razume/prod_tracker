@@ -14,23 +14,31 @@ const sync = async () => {
             text VARCHAR(255),
             type VARCHAR
         );
-
-        INSERT INTO activities(text, type) VALUES('Played video games for six hours', 'unproductive');
-        INSERT INTO activities(text, type) VALUES('Read the React docs', 'productive')
     `;
   await client.query(SQL);
+  await createActivity({ text: 'Went for a run', type: 'productive' });
+  await createActivity({ text: 'Read the React docs', type: 'productive' });
+  await createActivity({ text: 'Slept for 8 hours', type: 'productive' });
+  await createActivity({ text: 'Went for a run', type: 'productive' });
 };
 
 const readActivities = async () => {
   return (await client.query('SELECT * FROM activities')).rows;
 };
 
-const createActivity = async (activityName, activityType) => {
+const createActivity = async ({ text, type }) => {
   const SQL = 'INSERT INTO activities(text, type) VALUES($1, $2) RETURNING *';
-  return (await client.query(SQL, [activityName, activityType])).rows[0];
+  return (await client.query(SQL, [text, type])).rows[0];
+};
+
+const deleteActivity = async id => {
+  const SQL = 'DELETE FROM activities WHERE id = $1;';
+  await client.query(SQL, [id]);
 };
 
 module.exports = {
   sync,
-  readActivities
+  readActivities,
+  createActivity,
+  deleteActivity
 };
