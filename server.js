@@ -23,6 +23,12 @@ app.post('/api/activities', (req, res, next) => {
     .catch(next);
 });
 
+app.put('api/activities/:id', (req, res, next) => {
+  db.updatePerson(req.body)
+    .then(person => res.send(person))
+    .catch(next);
+});
+
 app.delete('/api/activities/:id', (req, res, next) => {
   db.deleteActivity(req.params.id)
     .then(() => res.sendStatus(204))

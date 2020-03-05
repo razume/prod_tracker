@@ -11,7 +11,6 @@ body {
 
 .title {
   margin-top: 1rem;
-  font-weight: lighter;
   text-align: center;
   font-size: 42pt;
 }
@@ -21,7 +20,8 @@ body {
   justify-content: center;
 }
 
-.score {
+.neutral-score {
+  background-color: rgb(230, 255, 91);
   font-family: 'Press Start 2P', cursive;
   text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
   display: flex;
@@ -35,6 +35,41 @@ body {
   font-size: 75pt;
   border: 8px solid rgba(37, 37, 37, 0.836);
   border-radius: 2px;
+  box-shadow: 1px 1px 10px 1px rgb(190, 190, 190);
+}
+.positive-score {
+  background-color: rgb(47, 255, 99);
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 75pt;
+  border: 8px solid rgba(37, 37, 37, 0.836);
+  border-radius: 2px;
+  box-shadow: 1px 1px 10px 1px rgb(190, 190, 190);
+}
+.negative-score {
+  background-color: rgb(255, 117, 117);
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+  display: flex;
+  margin-top: 3rem;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  font-size: 75pt;
+  border: 8px solid rgba(37, 37, 37, 0.836);
+  border-radius: 2px;
+  box-shadow: 1px 1px 10px 1px rgb(190, 190, 190);
 }
 
 .form-container {
@@ -76,6 +111,42 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 17pt;
+}
+
+.activity-list > h4 {
+  margin: 1rem;
+}
+
+.entry {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 60vh;
+}
+
+.entry-icons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.gg-pen {
+  margin-left: 1rem;
+  --ggs: 0.9;
+  color: rgb(187, 187, 187);
+}
+.gg-trash {
+  margin-left: 1rem;
+  --ggs: 0.9;
+  color: rgb(187, 187, 187);
+}
+.gg-pen:hover {
+  color: rgb(109, 123, 255);
+}
+.gg-trash:hover {
+  color: rgb(240, 100, 100);
 }
 
 li {

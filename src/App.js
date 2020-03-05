@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import Score from './components/Score';
+import ActivityForm from './components/ActivityForm';
+import ActivityList from './components/ActivityList';
 
 const App = () => {
   const [activities, setActivities] = useState([]);
@@ -35,6 +38,13 @@ const App = () => {
     }
   };
 
+  const updateActivity = activityToUpdate => {
+    console.log(activityToUpdate);
+    axios
+      .put(`api/activities/${activityToUpdate.id}`)
+      .then(response => console.log(response.data));
+  };
+
   const deleteActivity = activityToDelete => {
     axios.delete(`/api/activities/${activityToDelete.id}`).then(() => {
       axios.get('/api/activities').then(() => {
@@ -47,51 +57,13 @@ const App = () => {
 
   return (
     <div>
-      <div className="title">
-        <h2>Productivity Score</h2>
-      </div>
-      <div className="score-container">
-        <div className="score">
-          {activities.filter(activity => activity.type === 'productive')
-            .length -
-            activities.filter(activity => activity.type === 'unproductive')
-              .length}
-        </div>
-      </div>
-      <div className="form-container">
-        <div className="activity-form">
-          <input name="activity-text" placeholder="describe your activity" />
-          <span>
-            <input
-              type="button"
-              value="productive"
-              onClick={createProdActivity}
-            />
-            <input
-              type="button"
-              value="unproductive"
-              onClick={createUnprodActivity}
-            />
-          </span>
-        </div>
-      </div>
-      <div className="activity-list">
-        <h4>Tracked Activities:</h4>
-        <ul>
-          {activities.map(activity => {
-            return (
-              <li key={activity.id}>
-                {activity.text} - {activity.type}{' '}
-                <input
-                  type="button"
-                  onClick={() => deleteActivity(activity)}
-                  value="X"
-                />
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+      <h2 className="title">Productivity Score</h2>
+      <Score activities={activities} />
+      <ActivityForm
+        createProdActivity={createProdActivity}
+        createUnprodActivity={createUnprodActivity}
+      />
+      <ActivityList activities={activities} deleteActivity={deleteActivity} />
     </div>
   );
 };

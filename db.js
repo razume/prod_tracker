@@ -31,6 +31,8 @@ const createActivity = async ({ text, type }) => {
   return (await client.query(SQL, [text, type])).rows[0];
 };
 
+const updateActivity = async ({ id, text, type }) => {};
+
 const deleteActivity = async id => {
   const SQL = 'DELETE FROM activities WHERE id = $1;';
   await client.query(SQL, [id]);
@@ -40,5 +42,6 @@ module.exports = {
   sync,
   readActivities,
   createActivity,
+  updateActivity,
   deleteActivity
 };
