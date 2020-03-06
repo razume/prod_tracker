@@ -10,11 +10,13 @@ export default function ActivityForm({
         <input name="activity-text" placeholder="describe your activity" />
         <span>
           <input
+            className="prod-button"
             type="button"
             value="productive"
             onClick={createProdActivity}
           />
           <input
+            className="unprod-button"
             type="button"
             value="unproductive"
             onClick={createUnprodActivity}

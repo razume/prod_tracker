@@ -19,7 +19,7 @@ const sync = async () => {
   await createActivity({ text: 'Went for a run', type: 'productive' });
   await createActivity({ text: 'Read the React docs', type: 'productive' });
   await createActivity({ text: 'Slept for 8 hours', type: 'productive' });
-  await createActivity({ text: 'Went for a run', type: 'productive' });
+  await createActivity({ text: 'Went for a jog', type: 'productive' });
 };
 
 const readActivities = async () => {
@@ -31,7 +31,12 @@ const createActivity = async ({ text, type }) => {
   return (await client.query(SQL, [text, type])).rows[0];
 };
 
-const updateActivity = async ({ id, text, type }) => {};
+const updateActivity = async ({ text, type, id }) => {
+  const SQL =
+    'UPDATE activities SET text = $1, type = $2 WHERE id = $3 RETURNING *';
+  const response = await client.query(SQL, [text, type, id]);
+  return response.rows[0];
+};
 
 const deleteActivity = async id => {
   const SQL = 'DELETE FROM activities WHERE id = $1;';

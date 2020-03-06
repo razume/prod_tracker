@@ -23,9 +23,9 @@ app.post('/api/activities', (req, res, next) => {
     .catch(next);
 });
 
-app.put('api/activities/:id', (req, res, next) => {
-  db.updatePerson(req.body)
-    .then(person => res.send(person))
+app.put('/api/activities/:id', (req, res, next) => {
+  db.updateActivity(req.body)
+    .then(activity => res.send(activity))
     .catch(next);
 });
 

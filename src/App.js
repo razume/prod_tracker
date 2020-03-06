@@ -38,11 +38,64 @@ const App = () => {
     }
   };
 
+  const toggleEdit = activityToEdit => {
+    const activityNode = document.querySelector(
+      `[name="${activityToEdit.id}"]`
+    );
+    const spanToUnhide = activityNode.querySelector('[name="toggle-me"]');
+    spanToUnhide.classList.toggle('hide');
+  };
+
   const updateActivity = activityToUpdate => {
-    console.log(activityToUpdate);
-    axios
-      .put(`api/activities/${activityToUpdate.id}`)
-      .then(response => console.log(response.data));
+    const activityNode = document.querySelector(
+      `[name="${activityToUpdate.id}"]`
+    );
+    const originalText = activityToUpdate.text;
+    const updatedText = activityNode.querySelector('[name="edited-text"]')
+      .value;
+    const updatedType = activityNode.querySelector('[name="edited-type"]')
+      .value;
+
+    if (!updatedText) {
+      axios
+        .put(`api/activities/${activityToUpdate.id}`, {
+          text: originalText,
+          type: updatedType,
+          id: activityToUpdate.id
+        })
+        .then(response => {
+          setActivities(
+            activities.map(activity => {
+              if (activity.id === response.data.id) {
+                return response.data;
+              }
+              return activity;
+            })
+          );
+        })
+        .then(() => toggleEdit(activityToUpdate));
+    } else {
+      axios
+        .put(`api/activities/${activityToUpdate.id}`, {
+          text: updatedText,
+          type: updatedType,
+          id: activityToUpdate.id
+        })
+        .then(response => {
+          setActivities(
+            activities.map(activity => {
+              if (activity.id === response.data.id) {
+                return response.data;
+              }
+              return activity;
+            })
+          );
+        })
+        .then(() => {
+          toggleEdit(activityToUpdate);
+          activityNode.querySelector('[name="edited-text"]').value = '';
+        });
+    }
   };
 
   const deleteActivity = activityToDelete => {
@@ -57,13 +110,18 @@ const App = () => {
 
   return (
     <div>
-      <h2 className="title">Productivity Score</h2>
+      <h2 className="title">+Productivity Score</h2>
       <Score activities={activities} />
       <ActivityForm
         createProdActivity={createProdActivity}
         createUnprodActivity={createUnprodActivity}
       />
-      <ActivityList activities={activities} deleteActivity={deleteActivity} />
+      <ActivityList
+        activities={activities}
+        deleteActivity={deleteActivity}
+        toggleEdit={toggleEdit}
+        updateActivity={updateActivity}
+      />
     </div>
   );
 };

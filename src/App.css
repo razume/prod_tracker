@@ -4,9 +4,18 @@
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Asap Condensed', sans-serif;
+  font-weight: 400;
   color: rgba(37, 37, 37, 0.836);
   text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+}
+
+li {
+  list-style-type: none;
+}
+
+hr {
+  border: 0.5px solid rgba(212, 212, 212, 0.5);
 }
 
 .title {
@@ -57,7 +66,7 @@ body {
 .negative-score {
   background-color: rgb(255, 117, 117);
   font-family: 'Press Start 2P', cursive;
-  text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
+  text-shadow: 1px 1px 7px rgba(175, 9, 9, 0.815);
   display: flex;
   margin-top: 3rem;
   justify-content: center;
@@ -87,7 +96,7 @@ body {
 .activity-form > input {
   height: 2rem;
   margin-bottom: 0.5rem;
-  border: 2px solid rgba(37, 37, 37, 0.836);
+  border: 4px solid rgba(37, 37, 37, 0.836);
   padding: 3px;
 }
 
@@ -104,6 +113,17 @@ body {
   color: white;
   padding: 0.5rem;
   background-color: rgba(37, 37, 37, 0.836);
+}
+
+.prod-button,
+.unprod-button {
+  border: 1px solid rgb(58, 58, 58);
+  box-shadow: 1px 1px 10px 1px rgb(190, 190, 190);
+}
+
+.prod-button:hover,
+.unprod-button:hover {
+  box-shadow: 1px 1px 8px 1px rgb(77, 77, 77);
 }
 
 .activity-list {
@@ -126,21 +146,49 @@ body {
   width: 60vh;
 }
 
+.entry-text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.prod-icon {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid rgb(47, 255, 99);
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
+.unprod-icon {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid rgb(255, 117, 117);
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+
 .entry-icons {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 3px;
+  margin-bottom: 5px;
 }
 .gg-pen {
   margin-left: 1rem;
   --ggs: 0.9;
-  color: rgb(187, 187, 187);
+  color: rgb(226, 226, 226);
 }
 .gg-trash {
   margin-left: 1rem;
   --ggs: 0.9;
-  color: rgb(187, 187, 187);
+  color: rgb(226, 226, 226);
 }
 .gg-pen:hover {
   color: rgb(109, 123, 255);
@@ -149,6 +197,37 @@ body {
   color: rgb(240, 100, 100);
 }
 
-li {
-  list-style-type: square;
+.hide {
+  display: none;
+}
+
+.edit-container {
+  width: 29rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.edit-text {
+  width: 20rem;
+  padding: 3px;
+  border: 1px solid rgba(37, 37, 37, 0.336);
+  border-radius: 2px;
+}
+
+.edit-type {
+  border: 1px solid rgba(37, 37, 37, 0.336);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 3px;
+  border-radius: 2px;
+}
+
+.save-button {
+  border: 1px solid rgba(37, 37, 37, 0.336);
+  padding: 3px;
+  border-radius: 2px;
 }
