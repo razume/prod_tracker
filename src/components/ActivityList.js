@@ -45,7 +45,7 @@ export default function ActivityList({
                       name="edited-type"
                       className="edit-type"
                     >
-                      <option value="" disabled selected hidden>
+                      <option default value="">
                         choose type &#9661;
                       </option>
                       <option value="productive">productive</option>

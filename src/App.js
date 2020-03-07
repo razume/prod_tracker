@@ -53,8 +53,18 @@ const App = () => {
     const originalText = activityToUpdate.text;
     const updatedText = activityNode.querySelector('[name="edited-text"]')
       .value;
-    const updatedType = activityNode.querySelector('[name="edited-type"]')
-      .value;
+    let updatedType = activityNode.querySelector('[name="edited-type"]').value;
+
+    // both text input and type are left empty
+    if (!updatedText && !updatedType) {
+      toggleEdit(activityToUpdate);
+      return;
+    }
+
+    if (!updatedType) {
+      updatedType = activityToUpdate.type;
+      console.log(updatedType);
+    }
 
     if (!updatedText) {
       axios
