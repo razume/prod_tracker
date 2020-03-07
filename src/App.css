@@ -18,6 +18,40 @@ hr {
   border: 0.5px solid rgba(212, 212, 212, 0.5);
 }
 
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+  color: rgba(37, 37, 37, 0.836);
+}
+
+a:hover {
+  text-shadow: 1px 1px 7px rgba(92, 92, 92, 0.678);
+}
+
+a:active {
+  font-weight: bolder;
+}
+
+#logo {
+  font-family: 'Press Start 2P', cursive;
+  border: 2px solid rgba(36, 36, 36, 0.836);
+  border-radius: 2px;
+  padding: 2px;
+  background-color: rgba(124, 124, 124, 0.685);
+  font-weight: bolder;
+}
+
+#about-title {
+  margin: 1rem;
+}
+
+#about-body {
+  margin: 1rem;
+}
+
 .header-container {
   display: flex;
   flex-direction: row;
@@ -53,6 +87,8 @@ hr {
   font-family: 'Press Start 2P', cursive;
   text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
   display: flex;
+  height: 11rem;
+  width: 14rem;
   margin-top: 3rem;
   justify-content: center;
   align-items: center;
@@ -70,6 +106,8 @@ hr {
   font-family: 'Press Start 2P', cursive;
   text-shadow: 1px 1px 7px rgb(158, 158, 158, 0.596);
   display: flex;
+  height: 11rem;
+  width: 14rem;
   margin-top: 3rem;
   justify-content: center;
   align-items: center;
@@ -87,6 +125,8 @@ hr {
   font-family: 'Press Start 2P', cursive;
   text-shadow: 1px 1px 7px rgba(175, 9, 9, 0.815);
   display: flex;
+  height: 11rem;
+  width: 14rem;
   margin-top: 3rem;
   justify-content: center;
   align-items: center;

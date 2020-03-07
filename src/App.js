@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
+import About from './components/About';
+import Login from './components/Login';
 import Score from './components/Score';
 import ActivityForm from './components/ActivityForm';
 import ActivityList from './components/ActivityList';
@@ -120,21 +122,53 @@ const App = () => {
   };
 
   return (
-    <div>
-      <Header />
-      <h2 className="title">+Productivity Score</h2>
-      <Score activities={activities} />
-      <ActivityForm
-        createProdActivity={createProdActivity}
-        createUnprodActivity={createUnprodActivity}
-      />
-      <ActivityList
-        activities={activities}
-        deleteActivity={deleteActivity}
-        toggleEdit={toggleEdit}
-        updateActivity={updateActivity}
-      />
-    </div>
+    <Router>
+      <div>
+        <nav className="header-container">
+          <div>
+            <span>
+              <Link to="/">
+                <span id="logo">+PS</span>
+              </Link>
+            </span>
+            <span>
+              <Link to="/about">about</Link>
+            </span>
+            <span>
+              <Link to="/login">login / sign up</Link>{' '}
+            </span>
+          </div>
+          <i className="gg-dark-mode" />
+        </nav>
+
+        {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/">
+            <div>
+              <h2 className="title">+Productivity Score</h2>
+              <Score activities={activities} />
+              <ActivityForm
+                createProdActivity={createProdActivity}
+                createUnprodActivity={createUnprodActivity}
+              />
+              <ActivityList
+                activities={activities}
+                deleteActivity={deleteActivity}
+                toggleEdit={toggleEdit}
+                updateActivity={updateActivity}
+              />
+            </div>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   );
 };
 
