@@ -18,6 +18,25 @@ hr {
   border: 0.5px solid rgba(212, 212, 212, 0.5);
 }
 
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: rgba(221, 221, 221, 0.329);
+}
+
+.header-container > div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.header-container > div > * {
+  padding-right: 2rem;
+}
+
 .title {
   margin-top: 1rem;
   text-align: center;

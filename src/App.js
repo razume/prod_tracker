@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
+import Header from './components/Header';
 import Score from './components/Score';
 import ActivityForm from './components/ActivityForm';
 import ActivityList from './components/ActivityList';
@@ -120,6 +121,7 @@ const App = () => {
 
   return (
     <div>
+      <Header />
       <h2 className="title">+Productivity Score</h2>
       <Score activities={activities} />
       <ActivityForm
