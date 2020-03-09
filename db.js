@@ -39,6 +39,10 @@ const sync = async () => {
     username: 'moe',
     password: 'qwerty'
   });
+  const testUser4 = await createUser({
+    username: 'leighton',
+    password: 'password'
+  });
   await createActivity({
     text: 'studied for two hours',
     type: 'productive',

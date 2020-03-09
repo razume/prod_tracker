@@ -83,6 +83,8 @@ a:active {
   margin-top: 1rem;
   text-align: center;
   font-size: 42pt;
+  font-weight: 400;
+  letter-spacing: -0.07em;
 }
 
 .score-container {
@@ -266,39 +268,75 @@ a:active {
   color: rgb(240, 100, 100);
 }
 
+.gg-dark-mode:hover {
+  animation-name: spin;
+  animation-duration: 400ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .hide {
   display: none;
 }
 
 .edit-container {
   width: 29rem;
+  height: 5rem;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
 }
+.inner-edit-container {
+  width: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+}
 
 .edit-text {
-  width: 20rem;
   padding: 3px;
   border: 1px solid rgba(37, 37, 37, 0.336);
   border-radius: 2px;
+  margin-bottom: 8px;
 }
 
 .edit-type {
+  width: 5rem;
   border: 1px solid rgba(37, 37, 37, 0.336);
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   padding: 3px;
   border-radius: 2px;
+  margin-bottom: 8px;
 }
 
 .save-button {
-  border: 1px solid rgba(37, 37, 37, 0.336);
+  border: none;
+  background-color: rgba(69, 207, 87, 0.829);
+  color: white;
   padding: 3px;
   border-radius: 2px;
+  width: 5rem;
+}
+
+.save-button:hover {
+  border: none;
+  background-color: rgba(69, 207, 87, 0.555);
+  color: white;
+  padding: 3px;
+  border-radius: 2px;
+  width: 5rem;
 }
 
 .login-form-container {

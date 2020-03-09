@@ -35,28 +35,30 @@ export default function ActivityList({
                 </span>
                 <span name="toggle-me" className="hide">
                   <span className="edit-container">
-                    <input
-                      placeholder="edit activity description"
-                      name="edited-text"
-                      className="edit-text"
-                    />
-                    <select
-                      id="status"
-                      name="edited-type"
-                      className="edit-type"
-                    >
-                      <option default value="">
-                        choose type &#9661;
-                      </option>
-                      <option value="productive">productive</option>
-                      <option value="unproductive">unproductive</option>
-                    </select>
-                    <input
-                      type="button"
-                      value="save"
-                      className="save-button"
-                      onClick={() => updateActivity(activity)}
-                    />
+                    <div className="inner-edit-container">
+                      <input
+                        placeholder="edit activity description"
+                        name="edited-text"
+                        className="edit-text"
+                      />
+                      <select
+                        id="status"
+                        name="edited-type"
+                        className="edit-type"
+                      >
+                        <option default value="">
+                          choose type &#9661;
+                        </option>
+                        <option value="productive">productive</option>
+                        <option value="unproductive">unproductive</option>
+                      </select>
+                      <input
+                        type="button"
+                        value="save"
+                        className="save-button"
+                        onClick={() => updateActivity(activity)}
+                      />
+                    </div>
                   </span>
                 </span>
               </span>
