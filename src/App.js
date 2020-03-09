@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
 import About from './components/About';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 import Score from './components/Score';
 import ActivityForm from './components/ActivityForm';
 import ActivityList from './components/ActivityList';
@@ -12,6 +13,7 @@ const App = () => {
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState({ email: '', password: '' });
   const [activities, setActivities] = useState([]);
+  const [currentActivities, setCurrentActivities] = useState([]);
 
   useEffect(() => {
     Promise.all([axios.get('/api/users'), axios.get('/api/activities')])
@@ -19,6 +21,9 @@ const App = () => {
       .then(results => {
         setUsers(results[0]);
         setActivities(results[1]);
+        setCurrentActivities(
+          results[1].filter(activity => activity.userId === currentUser.id)
+        );
       });
   }, []);
 
@@ -32,6 +37,9 @@ const App = () => {
     );
     if (_currentUser[0]) {
       setCurrentUser(_currentUser[0]);
+      setCurrentActivities(
+        activities.filter(activity => activity.userId === _currentUser[0].id)
+      );
     } else {
       alert('invalid username or password');
     }
@@ -39,27 +47,45 @@ const App = () => {
 
   const createProdActivity = () => {
     const activityText = document.querySelector('[name="activity-text"]').value;
-    if (activityText) {
+    const userId = currentUser.id;
+    if (userId) {
       axios
-        .post('/api/activities', { text: activityText, type: 'productive' })
+        .post('/api/activities', {
+          text: activityText,
+          type: 'productive',
+          userId: userId
+        })
         .then(response => response.data)
-        .then(activity => setActivities([...activities, activity]))
+        .then(activity =>
+          setCurrentActivities([...currentActivities, activity])
+        )
         .then(
           () => (document.querySelector('[name="activity-text"]').value = '')
         );
+    } else {
+      alert('Please sign in to use this feature');
     }
   };
 
   const createUnprodActivity = () => {
     const activityText = document.querySelector('[name="activity-text"]').value;
-    if (activityText) {
+    const userId = currentUser.id;
+    if (userId) {
       axios
-        .post('/api/activities', { text: activityText, type: 'unproductive' })
+        .post('/api/activities', {
+          text: activityText,
+          type: 'unproductive',
+          userId: userId
+        })
         .then(response => response.data)
-        .then(activity => setActivities([...activities, activity]))
+        .then(activity =>
+          setCurrentActivities([...currentActivities, activity])
+        )
         .then(
           () => (document.querySelector('[name="activity-text"]').value = '')
         );
+    } else {
+      alert('Please sign in to use this feature');
     }
   };
 
@@ -98,8 +124,8 @@ const App = () => {
           id: activityToUpdate.id
         })
         .then(response => {
-          setActivities(
-            activities.map(activity => {
+          setCurrentActivities(
+            currentActivities.map(activity => {
               if (activity.id === response.data.id) {
                 return response.data;
               }
@@ -116,8 +142,8 @@ const App = () => {
           id: activityToUpdate.id
         })
         .then(response => {
-          setActivities(
-            activities.map(activity => {
+          setCurrentActivities(
+            currentActivities.map(activity => {
               if (activity.id === response.data.id) {
                 return response.data;
               }
@@ -135,8 +161,10 @@ const App = () => {
   const deleteActivity = activityToDelete => {
     axios.delete(`/api/activities/${activityToDelete.id}`).then(() => {
       axios.get('/api/activities').then(() => {
-        setActivities(
-          activities.filter(activity => activity.id !== activityToDelete.id)
+        setCurrentActivities(
+          currentActivities.filter(
+            activity => activity.id !== activityToDelete.id
+          )
         );
       });
     });
@@ -172,18 +200,28 @@ const App = () => {
             <About />
           </Route>
           <Route path="/login">
-            <Login currentUser={currentUser} logUserIn={logUserIn} />
+            <Login
+              setCurrentUser={setCurrentUser}
+              currentUser={currentUser}
+              logUserIn={logUserIn}
+            />
+          </Route>
+          <Route path="/signUp">
+            <SignUp />
           </Route>
           <Route path="/">
             <div>
               <h2 className="title">+Productivity Score</h2>
-              <Score activities={activities} />
+              <Score
+                activities={activities}
+                currentActivities={currentActivities}
+              />
               <ActivityForm
                 createProdActivity={createProdActivity}
                 createUnprodActivity={createUnprodActivity}
               />
               <ActivityList
-                activities={activities}
+                currentActivities={currentActivities}
                 deleteActivity={deleteActivity}
                 toggleEdit={toggleEdit}
                 updateActivity={updateActivity}

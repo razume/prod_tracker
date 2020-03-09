@@ -1,13 +1,17 @@
 import React from 'react';
 
-export default function Login({ logUserIn, currentUser }) {
+export default function Login({ logUserIn, setCurrentUser, currentUser }) {
+  const signOut = () => {
+    setCurrentUser({ username: '' });
+  };
   return (
     <div className="login-form-container">
       {currentUser.username ? (
         <div>
           <h2>Welcome, {currentUser.username}</h2>
           <p>
-            Not {currentUser.username}? <button>Sign out</button>
+            Not {currentUser.username}?{' '}
+            <button onClick={signOut}>Sign out</button>
           </p>
         </div>
       ) : (

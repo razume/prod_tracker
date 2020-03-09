@@ -1,20 +1,20 @@
 import React from 'react';
 
 export default function ActivityList({
-  activities,
+  currentActivities,
   deleteActivity,
   toggleEdit,
   updateActivity
 }) {
   return (
     <div className="activity-list">
-      {activities.length ? (
-        <h4>Tracked Activities ({activities.length})</h4>
+      {currentActivities.length ? (
+        <h4>Tracked Activities ({currentActivities.length})</h4>
       ) : (
         ''
       )}
       <ul>
-        {activities.map(activity => {
+        {currentActivities.map(activity => {
           return (
             <li name={activity.id} key={activity.id}>
               <span className="entry">

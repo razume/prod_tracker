@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function Score({ activities }) {
+export default function Score({ currentActivities }) {
   const score =
-    activities.filter(activity => activity.type === 'productive').length -
-    activities.filter(activity => activity.type === 'unproductive').length;
+    currentActivities.filter(activity => activity.type === 'productive')
+      .length -
+    currentActivities.filter(activity => activity.type === 'unproductive')
+      .length;
 
   return (
     <div className="score-container">
