@@ -11,6 +11,12 @@ app.get('/', (req, res, next) =>
   res.sendFile(path.join(__dirname, 'index.html'))
 );
 
+app.get('/api/users', (req, res, next) => {
+  db.readUsers()
+    .then(response => res.send(response))
+    .catch(next);
+});
+
 app.get('/api/activities', (req, res, next) => {
   db.readActivities()
     .then(response => res.send(response))

@@ -9,11 +9,33 @@ import ActivityForm from './components/ActivityForm';
 import ActivityList from './components/ActivityList';
 
 const App = () => {
+  const [users, setUsers] = useState([]);
+  const [currentUser, setCurrentUser] = useState({ email: '', password: '' });
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    axios.get('/api/activities').then(response => setActivities(response.data));
+    Promise.all([axios.get('/api/users'), axios.get('/api/activities')])
+      .then(responses => responses.map(response => response.data))
+      .then(results => {
+        setUsers(results[0]);
+        setActivities(results[1]);
+      });
   }, []);
+
+  const logUserIn = ev => {
+    ev.preventDefault();
+    const username = document.querySelector('[name="existing-username"]').value;
+    const password = document.querySelector('[name="existing-pw"]').value;
+    // set the current user
+    const _currentUser = users.filter(
+      user => user.username === username && user.password === password
+    );
+    if (_currentUser[0]) {
+      setCurrentUser(_currentUser[0]);
+    } else {
+      alert('invalid username or password');
+    }
+  };
 
   const createProdActivity = () => {
     const activityText = document.querySelector('[name="activity-text"]').value;
@@ -66,7 +88,6 @@ const App = () => {
 
     if (!updatedType) {
       updatedType = activityToUpdate.type;
-      console.log(updatedType);
     }
 
     if (!updatedText) {
@@ -126,19 +147,22 @@ const App = () => {
       <div>
         <nav className="header-container">
           <div>
+            <Link to="/">
+              <span id="logo">+PS</span>
+            </Link>
+            <Link to="/about">about</Link>
+          </div>
+          <div>
+            {currentUser.username ? (
+              <Link to="/login">sign out</Link>
+            ) : (
+              <Link to="/login">sign in</Link>
+            )}
+
             <span>
-              <Link to="/">
-                <span id="logo">+PS</span>
-              </Link>
-            </span>
-            <span>
-              <Link to="/about">about</Link>
-            </span>
-            <span>
-              <Link to="/login">login / sign up</Link>{' '}
+              <i className="gg-dark-mode" />
             </span>
           </div>
-          <i className="gg-dark-mode" />
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
@@ -148,7 +172,7 @@ const App = () => {
             <About />
           </Route>
           <Route path="/login">
-            <Login />
+            <Login currentUser={currentUser} logUserIn={logUserIn} />
           </Route>
           <Route path="/">
             <div>
