@@ -48,7 +48,7 @@ const App = () => {
   const createProdActivity = () => {
     const activityText = document.querySelector('[name="activity-text"]').value;
     const userId = currentUser.id;
-    if (userId) {
+    if (userId && activityText.trim()) {
       axios
         .post('/api/activities', {
           text: activityText,
@@ -63,14 +63,17 @@ const App = () => {
           () => (document.querySelector('[name="activity-text"]').value = '')
         );
     } else {
-      alert('Please sign in to use this feature');
+      alert(
+        'Invalid input. Must be signed in and have non empty activity value.'
+      );
+      document.querySelector('[name="activity-text"]').value = '';
     }
   };
 
   const createUnprodActivity = () => {
     const activityText = document.querySelector('[name="activity-text"]').value;
     const userId = currentUser.id;
-    if (userId) {
+    if (userId && activityText.trim()) {
       axios
         .post('/api/activities', {
           text: activityText,
@@ -85,7 +88,10 @@ const App = () => {
           () => (document.querySelector('[name="activity-text"]').value = '')
         );
     } else {
-      alert('Please sign in to use this feature');
+      alert(
+        'Invalid input. Must be signed in and have non empty activity value.'
+      );
+      document.querySelector('[name="activity-text"]').value = '';
     }
   };
 
